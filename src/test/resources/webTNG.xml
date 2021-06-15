@@ -4,6 +4,8 @@
     <parameter name="deviceName" value="emulator-5554"></parameter>
     <parameter name="platformName" value="Android"></parameter>
     <parameter name="browserName" value="Chrome"></parameter>
+    <parameter name="baseUrl" value="https://www.google.com/"></parameter>
+    <parameter name="searchText" value="Epam"></parameter>
     <test name="Web tests">
         <groups>
             <run>
