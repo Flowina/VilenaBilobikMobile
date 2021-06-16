@@ -1,8 +1,8 @@
 
-##Exercise 2
+## Exercise 2
 
-###To run native tests:
+### To run native tests:
 `mvn test -P native`
 
-###To run web tests:
+### To run web tests:
 `mvn test -P web`
