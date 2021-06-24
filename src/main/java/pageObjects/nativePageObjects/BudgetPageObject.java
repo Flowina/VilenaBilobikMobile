@@ -3,6 +3,7 @@ package pageObjects.nativePageObjects;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
@@ -13,6 +14,7 @@ public class BudgetPageObject {
             "android.widget.LinearLayout/android.widget.FrameLayout/" +
             "android.view.ViewGroup/android.widget.FrameLayout[2]/" +
             "android.view.ViewGroup/android.widget.TextView")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText")
     WebElement pageTitle;
 
     public BudgetPageObject(AppiumDriver appiumDriver) {

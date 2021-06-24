@@ -26,7 +26,16 @@ public class NativeActions {
         registrationPo.getPasswordTxt().sendKeys(password);
         registrationPo.getConfirmPasswordTxt().sendKeys(password);
         registrationPo.getAgreementCheckBox().click();
+
+        //po.getDriver().hideKeyboard();
         registrationPo.getRegisterBtn().click();
+
+        // second click required in iOs
+        // Is it a bug?
+        String platformName = (String) po.getDriver().getSessionDetails().get("platformName");
+        if (platformName.toLowerCase().equals("ios")) {
+            registrationPo.getRegisterBtn().click();
+        }
     }
 
     public void logIn(String login, String password) {

@@ -6,6 +6,8 @@ import pageObjects.NativePageObject;
 import pageObjects.WebPageObject;
 import pageObjects.webPageObjects.*;
 
+import java.util.List;
+
 public class WebActions {
     private final WebPageObject po;
     private final GoogleMainPagaObject mainPo;
@@ -22,8 +24,10 @@ public class WebActions {
     }
 
     public Boolean isSearchResultsContainsText(String text) {
-        for (WebElement w: searchResultsPageObject.getSearchResultItems()) {
-            if (w.getText().contains(text)) {
+        List<WebElement> items = searchResultsPageObject.getSearchResultItems();
+        for (WebElement w: items) {
+            String itemText = w.getText();
+            if (itemText != null && itemText.toLowerCase().contains(text.toLowerCase())) {
                 return true;
             }
         }
