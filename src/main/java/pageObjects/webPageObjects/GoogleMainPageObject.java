@@ -7,13 +7,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pageObjects.BasePageObject;
 
-import java.util.List;
+public class GoogleMainPageObject extends BasePageObject {
+    @FindBy(css = "input[name='q']")
+    WebElement searchField;
 
-public class GoogleSearchResultsPageObject extends BasePageObject {
-    @FindBy(css = "#rso [data-hveid]")
-    List<WebElement> searchResultItems;
-
-    public GoogleSearchResultsPageObject(AppiumDriver appiumDriver) {
+    public GoogleMainPageObject(AppiumDriver appiumDriver) {
         super(appiumDriver);
     }
 }

@@ -28,3 +28,6 @@ target
 .allure
 allure-results
 allure-report
+
+#TOKEN
+src/test/resources/token.properties

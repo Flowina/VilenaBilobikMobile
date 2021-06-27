@@ -3,9 +3,7 @@ package setup;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.*;
-import pageObjects.NativePageObject;
 import pageObjects.PageObject;
-import pageObjects.WebPageObject;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -15,77 +13,78 @@ import java.util.concurrent.TimeUnit;
 public class BaseTest implements IDriver {
 
     private static AppiumDriver appiumDriver; // singleton
-    IPageObject po;
-    NativePageObject nativePo;
-    WebPageObject webPo;
+    protected IPageObject po;
 
     @Override
     public AppiumDriver getDriver() {
         return appiumDriver;
     }
 
-    public IPageObject getPo() {
-        return po;
-    }
-
-    public NativePageObject getNativePo() {
-        return nativePo;
-    }
-
-    public WebPageObject getWebPo() {
-        if (webPo == null) {
-            webPo = new WebPageObject(getDriver());
-        }
-        return webPo;
-    }
-
-    @Parameters({"platformName", "appType", "deviceName", "browserName", "app"})
+    @Parameters({"platformName", "appType", "deviceName", "udid", "browserName",
+            "app","appPackage","appActivity","bundleId"})
     @BeforeSuite(alwaysRun = true)
-    public void setUp(String platformName, String appType, String deviceName, @Optional("") String browserName, @Optional("") String app) throws Exception {
+    public void setUp(String platformName,
+                      String appType,
+                      @Optional("") String deviceName,
+                      @Optional("") String udid,
+                      @Optional("") String browserName,
+                      @Optional("") String app,
+                      @Optional("") String appPackage,
+                      @Optional("") String appActivity,
+                      @Optional("") String bundleId
+    ) throws Exception {
         System.out.println("Before: app type - " + appType);
-        setAppiumDriver(platformName, deviceName, browserName, app);
+        setAppiumDriver(platformName, deviceName, udid, browserName, app, appPackage, appActivity, bundleId);
         setPageObject(appType, appiumDriver);
+        System.out.println("***** setUp end: po = " + this.po);
     }
 
     @AfterSuite(alwaysRun = true)
     public void tearDown() throws Exception {
-        //System.out.println("After");
+        System.out.println("***************After");
         appiumDriver.closeApp();
     }
 
-    private void setAppiumDriver(String platformName, String deviceName, String browserName, String app) {
+    private void setAppiumDriver(String platformName,
+                                 String deviceName,
+                                 String udid,
+                                 String browserName,
+                                 String app,
+                                 String appPackage,
+                                 String appActivity,
+                                 String bundleId
+    ){
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        //mandatory Android capabilities
-        capabilities.setCapability("platformName", platformName);
+        // mandatory Android capabilities
+        capabilities.setCapability("platformName",platformName);
         capabilities.setCapability("deviceName", deviceName);
+        capabilities.setCapability("udid", udid);
 
-        if (app.endsWith(".apk")) capabilities.setCapability("app", (new File(app)).getAbsolutePath());
+        if(app.endsWith(".apk")) {
+            capabilities.setCapability("app", (new File(app)).getAbsolutePath());
+        }
 
         capabilities.setCapability("browserName", browserName);
-        capabilities.setCapability("chromedriverDisableBuildCheck", "true");
-
+        capabilities.setCapability("chromedriverDisableBuildCheck","true");
+        // Capabilities for test of Android native app on EPAM Mobile Cloud
+        capabilities.setCapability("appPackage",appPackage);
+        capabilities.setCapability("appActivity",appActivity);
+        // Capabilities for test of iOS native app on EPAM Mobile Cloud
+        capabilities.setCapability("bundleId",bundleId);
+        //if(platformName.equals("iOS")) capabilities.setCapability("automationName","XCUITest");
         try {
             appiumDriver = new AppiumDriver(new URL(System.getProperty("ts.appium")), capabilities);
         } catch (MalformedURLException e) {
+            System.out.println("****** SET APPIUM DRIVER ERROR");
             e.printStackTrace();
         }
-
         // Timeouts tuning
         appiumDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
     }
 
     private void setPageObject(String appType, AppiumDriver appiumDriver) throws Exception {
+        System.out.println("****** setPO start");
         po = new PageObject(appType, appiumDriver);
-        switch (appType) {
-            case "native":
-                nativePo = new NativePageObject(appiumDriver);
-                break;
-            case "web":
-                webPo = new WebPageObject(appiumDriver);
-                break;
-            default:
-                throw new Exception("Create page object. Unsupported type:  " + appType);
-        }
+        System.out.println("****** SET PO end: " + po);
     }
 }
