@@ -2,12 +2,11 @@ package pageObjects.nativePageObjects;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
+import pageObjects.BasePageObject;
 
-public class RegistrationPageObject {
+public class RegistrationPageObject extends BasePageObject {
     @AndroidFindBy(id = "platkovsky.alexey.epamtestapp:id/registration_email")
     //@iOSXCUITFindBy(xpath = "//XCUIElementTypeTextField[@value='user@example.com']")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@value='Email']/following-sibling::XCUIElementTypeTextField[1]")
@@ -38,6 +37,6 @@ public class RegistrationPageObject {
     WebElement cancelBtn;
 
     public RegistrationPageObject(AppiumDriver appiumDriver) {
-        PageFactory.initElements( new AppiumFieldDecorator(appiumDriver), this);
+        super(appiumDriver);
     }
 }

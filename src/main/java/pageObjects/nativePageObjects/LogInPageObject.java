@@ -2,12 +2,11 @@ package pageObjects.nativePageObjects;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
+import pageObjects.BasePageObject;
 
-public class LogInPageObject {
+public class LogInPageObject extends BasePageObject {
     @AndroidFindBy(id = "platkovsky.alexey.epamtestapp:id/email_sign_in_button")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@label='Sign In']")
     WebElement signInBtn;
@@ -26,6 +25,6 @@ public class LogInPageObject {
     WebElement passwordTxt;
 
     public LogInPageObject(AppiumDriver appiumDriver) {
-        PageFactory.initElements( new AppiumFieldDecorator(appiumDriver), this);
+        super(appiumDriver);
     }
 }

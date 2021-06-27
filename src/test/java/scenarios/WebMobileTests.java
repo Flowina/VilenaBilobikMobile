@@ -14,7 +14,7 @@ public class WebMobileTests extends BaseTest {
     @BeforeMethod(alwaysRun = true)
     public void beforeMethod() throws Exception {
         if (po == null) {
-            System.out.println("***** WTF?!! Why is po NULL ?!!");
+            System.out.println("***** Why is po NULL ?!!");
             // I don't know why the po field is null here.
             // In the NativeMobileTests the same code works perfectly.
             // WORKAROUND: Reinitialize po
