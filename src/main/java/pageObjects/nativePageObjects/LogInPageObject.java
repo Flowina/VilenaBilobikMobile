@@ -28,20 +28,4 @@ public class LogInPageObject {
     public LogInPageObject(AppiumDriver appiumDriver) {
         PageFactory.initElements( new AppiumFieldDecorator(appiumDriver), this);
     }
-
-    public WebElement getSignInBtn() {
-        return signInBtn;
-    }
-
-    public WebElement getRegisterBtn() {
-        return registerBtn;
-    }
-
-    public WebElement getUserNameTxt() {
-        return userNameTxt;
-    }
-
-    public WebElement getPasswordTxt() {
-        return passwordTxt;
-    }
 }

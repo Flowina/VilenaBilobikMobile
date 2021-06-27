@@ -8,7 +8,6 @@ import pageObjects.nativePageObjects.LogInPageObject;
 import pageObjects.nativePageObjects.RegistrationPageObject;
 
 public class NativePageObject {
-
     private RegistrationPageObject registrationPage;
     private LogInPageObject logInPage;
     private BudgetPageObject budgetPage;
@@ -20,18 +19,6 @@ public class NativePageObject {
         budgetPage = new BudgetPageObject(appiumDriver);
         this.appiumDriver = appiumDriver;
         PageFactory.initElements(new AppiumFieldDecorator(appiumDriver), this);
-    }
-
-    public BudgetPageObject getBudgetPage() {
-        return budgetPage;
-    }
-
-    public LogInPageObject getLogInPage() {
-        return logInPage;
-    }
-
-    public RegistrationPageObject getRegistrationPage() {
-        return registrationPage;
     }
 
     public AppiumDriver getDriver() {

@@ -23,3 +23,6 @@
 
 ### To run web tests Android:
 `mvn test -P cloudAndroidWeb`
+
+### To run web tests iOS:
+`mvn test -P cloudIOsWeb`

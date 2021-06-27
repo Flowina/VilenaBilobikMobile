@@ -6,19 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class GoogleMainPagaObject {
+public class GoogleMainPageObject {
     @FindBy(css = "input[name='q']")
     WebElement searchField;
 
-    public GoogleMainPagaObject(AppiumDriver appiumDriver) {
+    public GoogleMainPageObject(AppiumDriver appiumDriver) {
         PageFactory.initElements( new AppiumFieldDecorator(appiumDriver), this);
-    }
-
-    public WebElement getSearchField() {
-        return searchField;
-    }
-
-    public void setSearchField(WebElement searchField) {
-        this.searchField = searchField;
     }
 }

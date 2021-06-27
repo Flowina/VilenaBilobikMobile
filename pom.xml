@@ -103,7 +103,17 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.file>./src/test/resources/cloudWebTNG.xml</suite.file>
+                <suite.file>./src/test/resources/cloudAndroidWebTNG.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>cloudIOsWeb</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/cloudIosWebTNG.xml</suite.file>
             </properties>
         </profile>
 

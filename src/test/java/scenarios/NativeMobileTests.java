@@ -4,20 +4,18 @@ import actions.NativeActions;
 import data.TestDataProvider;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pageObjects.PageObject;
 import setup.BaseTest;
 
-public class nativeMobileTests extends BaseTest {
+public class NativeMobileTests extends BaseTest {
     NativeActions actions;
     String budgetPageTitle;
 
     @Parameters({"budgetPageTitle"})
     @BeforeMethod(alwaysRun = true)
     public void beforeMethod(String budgetPageTitle) {
-        actions = new NativeActions(getNativePo());
+        actions = new NativeActions(po);
         this.budgetPageTitle = budgetPageTitle;
     }
 
@@ -30,7 +28,7 @@ public class nativeMobileTests extends BaseTest {
     @Test(groups = {"native"},
             description = "Register a new account and then sign in. Make sure that you are on the BudgetActivity page",
             dataProviderClass = TestDataProvider.class, dataProvider = "registrationData")
-    public void registerAndLogInTest(String userName, String email, String password) {
+    public void registerAndLogInTest(String userName, String email, String password) throws NoSuchFieldException, IllegalAccessException, InstantiationException {
         actions.goToRegistrationPage();
         actions.register(userName, email, password);
         actions.logIn(email, password);

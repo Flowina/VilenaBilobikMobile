@@ -3,9 +3,7 @@ package setup;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.*;
-import pageObjects.NativePageObject;
 import pageObjects.PageObject;
-import pageObjects.WebPageObject;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -15,31 +13,13 @@ import java.util.concurrent.TimeUnit;
 public class BaseTest implements IDriver {
 
     private static AppiumDriver appiumDriver; // singleton
-    IPageObject po;
-    NativePageObject nativePo;
-    WebPageObject webPo;
+    protected IPageObject po;
 
     @Override
     public AppiumDriver getDriver() {
         return appiumDriver;
     }
 
-    public IPageObject getPo() {
-        return po;
-    }
-
-    public NativePageObject getNativePo() {
-        return nativePo;
-    }
-
-    public WebPageObject getWebPo() {
-        if (webPo == null) {
-            webPo = new WebPageObject(getDriver());
-        }
-        return webPo;
-    }
-
-    //@Parameters({"platformName", "appType", "deviceName", "browserName", "app"})
     @Parameters({"platformName", "appType", "deviceName", "udid", "browserName",
             "app","appPackage","appActivity","bundleId"})
     @BeforeSuite(alwaysRun = true)
@@ -56,11 +36,12 @@ public class BaseTest implements IDriver {
         System.out.println("Before: app type - " + appType);
         setAppiumDriver(platformName, deviceName, udid, browserName, app, appPackage, appActivity, bundleId);
         setPageObject(appType, appiumDriver);
+        System.out.println("***** setUp end: po = " + this.po);
     }
 
     @AfterSuite(alwaysRun = true)
     public void tearDown() throws Exception {
-        //System.out.println("After");
+        System.out.println("***************After");
         appiumDriver.closeApp();
     }
 
@@ -94,6 +75,7 @@ public class BaseTest implements IDriver {
         try {
             appiumDriver = new AppiumDriver(new URL(System.getProperty("ts.appium")), capabilities);
         } catch (MalformedURLException e) {
+            System.out.println("****** SET APPIUM DRIVER ERROR");
             e.printStackTrace();
         }
         // Timeouts tuning
@@ -101,16 +83,8 @@ public class BaseTest implements IDriver {
     }
 
     private void setPageObject(String appType, AppiumDriver appiumDriver) throws Exception {
+        System.out.println("****** setPO start");
         po = new PageObject(appType, appiumDriver);
-        switch (appType) {
-            case "native":
-                nativePo = new NativePageObject(appiumDriver);
-                break;
-            case "web":
-                webPo = new WebPageObject(appiumDriver);
-                break;
-            default:
-                throw new Exception("Create page object. Unsupported type:  " + appType);
-        }
+        System.out.println("****** SET PO end: " + po);
     }
 }

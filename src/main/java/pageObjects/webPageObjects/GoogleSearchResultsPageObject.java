@@ -15,8 +15,4 @@ public class GoogleSearchResultsPageObject {
     public GoogleSearchResultsPageObject(AppiumDriver appiumDriver) {
         PageFactory.initElements( new AppiumFieldDecorator(appiumDriver), this);
     }
-
-    public List<WebElement> getSearchResultItems() {
-        return searchResultItems;
-    }
 }

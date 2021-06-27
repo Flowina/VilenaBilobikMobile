@@ -1,15 +1,16 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="iOS Native mobile testing Suite for EPAM Mobile Cloud">
-    <parameter name="appType" value="native"></parameter>
+<suite name="EPAM mobile cloud Web testing Suite">
+    <parameter name="appType" value="web"></parameter>
     <!--parameter name="udid" value="00008030-0000798A0EF2802E"></parameter-->
     <parameter name="udid" value="00008030-001115E40EE2802E"></parameter>
     <parameter name="platformName" value="iOS"></parameter>
-    <parameter name="bundleId" value="com.epam.EPAMTestApp.ii"></parameter>
-    <parameter name="budgetPageTitle" value="Budget"></parameter>
-    <test name="iOS Native tests">
+    <parameter name="browserName" value="Safari"></parameter>
+    <parameter name="baseUrl" value="https://www.google.com/"></parameter>
+    <parameter name="searchText" value="Epam"></parameter>
+    <test name="Cloud Web tests">
         <groups>
             <run>
-                <include name="native"/>
+                <include name="web"/>
             </run>
         </groups>
         <packages>

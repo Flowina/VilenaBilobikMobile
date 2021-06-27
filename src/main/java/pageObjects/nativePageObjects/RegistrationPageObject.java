@@ -40,32 +40,4 @@ public class RegistrationPageObject {
     public RegistrationPageObject(AppiumDriver appiumDriver) {
         PageFactory.initElements( new AppiumFieldDecorator(appiumDriver), this);
     }
-
-    public WebElement getEmailTxt() {
-        return emailTxt;
-    }
-
-    public WebElement getUserNameTxt() {
-        return userNameTxt;
-    }
-
-    public WebElement getPasswordTxt() {
-        return passwordTxt;
-    }
-
-    public WebElement getConfirmPasswordTxt() {
-        return confirmPasswordTxt;
-    }
-
-    public WebElement getAgreementCheckBox() {
-        return agreementCheckBox;
-    }
-
-    public WebElement getRegisterBtn() {
-        return registerBtn;
-    }
-
-    public WebElement getCancelBtn() {
-        return cancelBtn;
-    }
 }

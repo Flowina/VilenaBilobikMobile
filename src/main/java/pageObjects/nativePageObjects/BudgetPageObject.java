@@ -20,8 +20,4 @@ public class BudgetPageObject {
     public BudgetPageObject(AppiumDriver appiumDriver) {
         PageFactory.initElements( new AppiumFieldDecorator(appiumDriver), this);
     }
-
-    public WebElement getPageTitle() {
-        return pageTitle;
-    }
 }
