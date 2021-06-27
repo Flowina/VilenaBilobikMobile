@@ -12,7 +12,7 @@ public class PageObject implements IPageObject {
 
     public PageObject(String appType, AppiumDriver appiumDriver) throws Exception {
 
-        System.out.println("Current app type: "+appType);
+        System.out.println("Current app type: " + appType);
         switch(appType){
             case "web":
                 somePageObject = new WebPageObject(appiumDriver);
